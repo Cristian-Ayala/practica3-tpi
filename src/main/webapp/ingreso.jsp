@@ -39,17 +39,20 @@
             <div class="row">
                 <div class="col-md-10 col-lg-8 mx-auto">
                     <h1 style="color:#000000">Ingresa tus datos:</h1>
-                    <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                    <form id="contactForm" name="sentMessage" method="POST" action="usuarios">
                         <div class="control-group">
-                            <div class="form-group floating-label-form-group controls"><label>Usuario</label><input class="form-control" type="text" id="name" required="" placeholder="Usuario"><small class="form-text text-danger help-block"></small></div>
+                            <div class="form-group floating-label-form-group controls"><label>Usuario</label><input name="txtUsuario" class="form-control" type="text"  required="" placeholder="Usuario"><small class="form-text text-danger help-block"></small></div>
                         </div>
                         <div class="control-group">
-                            <div class="form-group floating-label-form-group controls"><label>Contraseña</label><input class="form-control" type="password" placeholder="Contraseña"><small class="form-text text-danger help-block"></small></div>
+                            <div class="form-group floating-label-form-group controls"><label>Contraseña</label><input name="txtContrasenia" class="form-control" type="password" placeholder="Contraseña"><small class="form-text text-danger help-block"></small></div>
                         </div>
                         <div class="control-group"></div>
                         <div id="success"></div>
                         <div class="form-group"><button class="btn btn-primary" id="sendMessageButton" type="submit">Iniciar</button></div>
                     </form>
+                    <div class="alert alert-danger" role="alert" style="display:${(estado!='FAIL')?('inherit'):('none')}">
+                        Contraseña o usuario incorrectos.
+                    </div>
                 </div>
             </div>
         </div>

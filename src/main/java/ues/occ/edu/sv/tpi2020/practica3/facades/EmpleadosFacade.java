@@ -10,7 +10,7 @@ import ues.occ.edu.sv.tpi2020.practica3.entities.Empleados;
  * @author cristian
  */
 @Stateless
-public class EmpleadosFacade extends AbstractFacade<Empleados> implements EmpleadosFacadeLocal {
+public class EmpleadosFacade extends AbstractFacade<Empleados> implements GenericLocalInterface<Empleados> {
 
     @PersistenceContext(unitName = "practica3")
     private EntityManager em;
@@ -22,6 +22,5 @@ public class EmpleadosFacade extends AbstractFacade<Empleados> implements Emplea
 
     public EmpleadosFacade() {
         super(Empleados.class);
-    }
-    
+    }    
 }

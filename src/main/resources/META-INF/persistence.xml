@@ -3,6 +3,8 @@
   <persistence-unit name="practica3" transaction-type="JTA">
     <jta-data-source>java:app/practica3</jta-data-source>
     <class>ues.occ.edu.sv.tpi2020.practica3.entities.Empleados</class>
+    <class>ues.occ.edu.sv.tpi2020.practica3.entities.TipoUsuarios</class>
+    <class>ues.occ.edu.sv.tpi2020.practica3.entities.Usuarios</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>
