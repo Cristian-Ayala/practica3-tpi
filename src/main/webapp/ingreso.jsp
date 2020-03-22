@@ -50,7 +50,7 @@
                         <div id="success"></div>
                         <div class="form-group"><button class="btn btn-primary" id="sendMessageButton" type="submit">Iniciar</button></div>
                     </form>
-                    <div class="alert alert-danger" role="alert" style="display:${(estado!='FAIL')?('inherit'):('none')}">
+                    <div class="alert alert-danger" role="alert" style="display:${(estado=='FAIL')?('inherit'):('none')}">
                         Contraseña o usuario incorrectos.
                     </div>
                 </div>
