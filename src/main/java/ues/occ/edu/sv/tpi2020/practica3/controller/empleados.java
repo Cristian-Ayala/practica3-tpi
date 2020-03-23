@@ -2,13 +2,18 @@ package ues.occ.edu.sv.tpi2020.practica3.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ues.occ.edu.sv.tpi2020.practica3.entities.Empleados;
+import ues.occ.edu.sv.tpi2020.practica3.facades.EmpleadosFacade;
 
 /**
  *
@@ -16,6 +21,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "empleados", urlPatterns = {"/empleados"})
 public class empleados extends HttpServlet {
+
+    @Inject
+    EmpleadosFacade empleadosFacade;
+    Empleados empleado = new Empleados();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,9 +43,14 @@ public class empleados extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet empleados</title>");            
+            out.println("<title>Empleados</title>");
             out.println("</head>");
             out.println("<body>");
+//                        Empleados empleado = new Empleados(Integer.SIZE, nombre, apellidos, telefono);
+
+            request.setAttribute("listaEmpleados", empleadosFacade.findAll());
+            RequestDispatcher rd = request.getRequestDispatcher("/CRUD.jsp");
+            rd.forward(request, response);
             out.println("<h1>Servlet empleados at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
@@ -57,7 +71,7 @@ public class empleados extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
+
 //        catch (Exception ex) {
 //            Logger.getLogger(empleados.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
     }

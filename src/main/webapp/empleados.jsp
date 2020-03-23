@@ -12,6 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Bienvenido</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
@@ -26,7 +27,7 @@
                 class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">INICIO</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="<%= request.getContextPath() %>/CRUD.jsp">empleados</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="<%= request.getContextPath() %>/empleados">empleados</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="ingreso.jsp">cerrar sesión</a></li>
                     <li class="nav-item" role="presentation"></li>
                 </ul>
