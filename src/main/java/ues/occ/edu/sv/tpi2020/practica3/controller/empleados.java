@@ -46,8 +46,17 @@ public class empleados extends HttpServlet {
             out.println("<title>Empleados</title>");
             out.println("</head>");
             out.println("<body>");
-//                        Empleados empleado = new Empleados(Integer.SIZE, nombre, apellidos, telefono);
-
+            System.out.println("antes del try-catch");
+            try {
+                System.out.println(request.getParameter("editId"));
+                System.out.println(request.getParameter("editNombre"));
+                if (request.getParameter("editId") != null) {
+                    empleado = new Empleados( Integer.parseInt(request.getParameter("editId")), request.getParameter("editNombre"), request.getParameter("editApellido"), request.getParameter("editTel"));
+                    empleadosFacade.edit(empleado);
+                }
+            } catch (Exception e) {
+            }
+            System.out.println("despues del try-catch");
             request.setAttribute("listaEmpleados", empleadosFacade.findAll());
             RequestDispatcher rd = request.getRequestDispatcher("/CRUD.jsp");
             rd.forward(request, response);

@@ -44,15 +44,15 @@
         <div id="center" style="display: inline-flex;">
             <div id="divForm" style="padding-left: 30px;max-width: 30%;display: inline-block;vertical-align: top;margin-right: 50px;">
                 <h2 class="post-title">Agrega un nuevo empleado:</h2>
-                <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                <form id="contactForm" name="sentMessage">
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls"><label>Nombres</label><input class="form-control" type="text" id="name" required="" placeholder="Nombres"><small class="form-text text-danger help-block"></small></div>
                     </div>
                     <div class="control-group">
-                        <div class="form-group floating-label-form-group controls"><label>Apellidos</label><input class="form-control" type="email" id="email" required="" placeholder="Apellidos"><small class="form-text text-danger help-block"></small></div>
+                        <div class="form-group floating-label-form-group controls"><label>Apellidos</label><input class="form-control" type="text" id="email" required="" placeholder="Apellidos"><small class="form-text text-danger help-block"></small></div>
                     </div>
                     <div class="control-group">
-                        <div class="form-group floating-label-form-group controls"><label>Teléfono</label><input class="form-control" type="tel" id="phone" required="" placeholder="Teléfono"><small class="form-text text-danger help-block"></small></div>
+                        <div class="form-group floating-label-form-group controls"><label>Teléfono</label><input class="form-control" type="text" id="phone" required="" placeholder="Teléfono"><small class="form-text text-danger help-block"></small></div>
                     </div>
                     <div id="success"></div>
                     <div class="form-group"><button class="btn btn-primary" id="sendMessageButton" type="submit" style="margin-top: 30px;">CRear</button></div>
@@ -87,7 +87,7 @@
                                             <button class="add"  id="remove${loop.index}" onclick="editOrRem(this.id)" style="margin-right:10px" data-toggle="modal" data-target="#modal-1">
                                                 <i class="fa fa-trash"></i>
                                             </button>
-                                            <button class="warningButtom" id="edit${loop.index}" data-toggle="modal" data-target="#modal-2">
+                                            <button class="warningButtom" id="edit${loop.index}" onclick="editOrRem(this.id)" data-toggle="modal" data-target="#modal-2">
                                                 <i class="fa fa-pencil"></i>
                                             </button>
                                         </td>
@@ -117,20 +117,22 @@
                         <h4 class="modal-title">Modicar</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                     <div class="modal-body">
                         <div id="divForm-1">
-                            <form id="contactForm-1" name="sentMessage" novalidate="novalidate">
+                            <form id="contactForm-1" name="sentMessage" method="POST" action="empleados">
                                 <div class="control-group">
-                                    <div class="form-group floating-label-form-group controls"><label>Nombres</label><input class="form-control" type="text" id="name" required="" placeholder="Nombres"><small class="form-text text-danger help-block"></small></div>
+                                    <div class="form-group floating-label-form-group controls floating-label-form-group-with-value">
+                                        <input type="hidden" id="editId" type="text" value="">
+                                        <label>Nombres</label><input class="form-control" type="text" id="editNombre" required="" placeholder="Nombres"><small class="form-text text-danger help-block"></small></div>
                                 </div>
                                 <div class="control-group">
-                                    <div class="form-group floating-label-form-group controls"><label>Apellidos</label><input class="form-control" type="email" id="email" required="" placeholder="Apellidos"><small class="form-text text-danger help-block"></small></div>
+                                    <div class="form-group floating-label-form-group controls floating-label-form-group-with-value"><label>Apellidos</label><input class="form-control" type="text" id="editApellido" required="" placeholder="Apellidos"><small class="form-text text-danger help-block"></small></div>
                                 </div>
                                 <div class="control-group">
-                                    <div class="form-group floating-label-form-group controls"><label>Teléfono</label><input class="form-control" type="tel" id="phone" required="" placeholder="Teléfono"><small class="form-text text-danger help-block"></small></div>
+                                    <div class="form-group floating-label-form-group controls floating-label-form-group-with-value"><label>Teléfono</label><input class="form-control" type="text" id="editTel" required="" placeholder="Teléfono"><small class="form-text text-danger help-block"></small></div>
                                 </div>
+                                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">cerrar</button><button class="btn btn-primary" type="submit">confirmar</button></div>
                             </form>
                         </div>
                     </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">cerrar</button><button class="btn btn-primary" type="button">confirmar</button></div>
                 </div>
             </div>
         </div>

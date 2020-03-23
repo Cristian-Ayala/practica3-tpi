@@ -9,8 +9,15 @@ $(window).on("load", function () {
 });
 
 function editOrRem(idBoton) {
-    document.getElementById("empleadix").innerHTML = document.getElementById(idBoton).parentNode.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
-    document.getElementById(idBoton).parentNode.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+    if (idBoton.substring(0, 6) === "remove") {
+        document.getElementById("empleadix").innerHTML = document.getElementById(idBoton).parentNode.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+    } else {
+        document.getElementById("editId").value = document.getElementById(idBoton).parentNode.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+        console.log(document.getElementById(idBoton).parentNode.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML);
+        document.getElementById("editNombre").value = document.getElementById(idBoton).parentNode.previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+        document.getElementById("editApellido").value = document.getElementById(idBoton).parentNode.previousElementSibling.previousElementSibling.innerHTML;
+        document.getElementById("editTel").value = document.getElementById(idBoton).parentNode.previousElementSibling.innerHTML;
+    }
 }
 
 
