@@ -8,6 +8,10 @@
         <servlet-name>usuarios</servlet-name>
         <servlet-class>ues.occ.edu.sv.tpi2020.practica3.controller.usuarios</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>userServlet</servlet-name>
+        <servlet-class>ues.occ.edu.sv.tpi2020.practica3.controller.userServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>empleados</servlet-name>
         <url-pattern>/empleados</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>usuarios</servlet-name>
         <url-pattern>/usuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userServlet</servlet-name>
+        <url-pattern>/userServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

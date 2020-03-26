@@ -2,7 +2,6 @@ package ues.occ.edu.sv.tpi2020.practica3.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
@@ -26,6 +25,11 @@ public class empleados extends HttpServlet {
     EmpleadosFacade empleadosFacade;
     Empleados empleado = new Empleados();
 
+    public static boolean isNullOrEmpty(String str) {
+        return ((str != null) ? (!str.trim().isEmpty()) : (false));
+    }
+//<%= request.getSession().getAttribute("usuario")%>
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,17 +50,32 @@ public class empleados extends HttpServlet {
             out.println("<title>Empleados</title>");
             out.println("</head>");
             out.println("<body>");
-            System.out.println("antes del try-catch");
             try {
-                System.out.println(request.getParameter("editId"));
-                System.out.println(request.getParameter("editNombre"));
-                if (request.getParameter("editId") != null) {
-                    empleado = new Empleados( Integer.parseInt(request.getParameter("editId")), request.getParameter("editNombre"), request.getParameter("editApellido"), request.getParameter("editTel"));
+
+                //Evalua si quiere crear empleado
+                if (isNullOrEmpty(request.getParameter("name")) && isNullOrEmpty(request.getParameter("email")) && isNullOrEmpty(request.getParameter("phone"))) {
+                    empleado = new Empleados(null, request.getParameter("name"), request.getParameter("email"), request.getParameter("phone"));
+                    if (empleadosFacade.noCreated(empleado)) {
+                        empleadosFacade.create(empleado);
+                        System.out.println("se creo con exito");
+                        request.setAttribute("correcto", "true");
+                    } else {
+                        System.out.println("no se creo con exito :/");
+                        request.setAttribute("correcto", "false");
+                    }
+
+                    //Evalua si quiere editar al empleado
+                } else if (isNullOrEmpty(request.getParameter("editId")) && isNullOrEmpty(request.getParameter("editNombre")) && isNullOrEmpty(request.getParameter("editApellido")) && isNullOrEmpty(request.getParameter("editTel"))) {
+                    empleado = new Empleados(Integer.parseInt(request.getParameter("editId")), request.getParameter("editNombre"), request.getParameter("editApellido"), request.getParameter("editTel"));
                     empleadosFacade.edit(empleado);
+
+                    //Evalua si lo quiere eliminar
+                } else if (isNullOrEmpty(request.getParameter("empleadixID"))) {
+                    empleadosFacade.eliminarById(Integer.parseInt(request.getParameter("empleadixID")));
                 }
-            } catch (Exception e) {
+            } catch (Exception ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
-            System.out.println("despues del try-catch");
             request.setAttribute("listaEmpleados", empleadosFacade.findAll());
             RequestDispatcher rd = request.getRequestDispatcher("/CRUD.jsp");
             rd.forward(request, response);

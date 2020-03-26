@@ -1,4 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page session="true" %>
+<%
+    request.getSession().invalidate();
+%>
 <!DOCTYPE html>
 <html>
 
@@ -31,7 +35,7 @@
                 <div class="row">
                     <div class="col-md-10 col-lg-8 mx-auto">
                         <div class="site-heading">
-                            <h1 style="background-image: linear-gradient( 109.6deg,  rgba(227,236,62,0.79) 11.2%, rgba(230,29,58,1) 91.3% );">Inisio de sesión</h1><span class="subheading">Registrate para poder acceder a la mejor aplicación.</span></div>
+                            <h1 style="background-image: linear-gradient( 109.6deg,  rgba(227,236,62,0.79) 11.2%, rgba(230,29,58,1) 91.3% );">Inicio de sesión</h1><span class="subheading">Registrate para poder acceder a la mejor aplicación.</span></div>
                     </div>
                 </div>
             </div>
@@ -39,13 +43,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="alert alert-danger" role="alert" style="display:${request.getParameter("error").equals("true")?('inherit'):('none')};" name="<%=request.getParameter("error")%>">
+                        Debes ingresar primero.
+                    </div>
                     <h1 style="color:#000000">Ingresa tus datos:</h1>
                     <form id="contactForm" name="sentMessage" method="POST" action="usuarios">
                         <div class="control-group">
-                            <div class="form-group floating-label-form-group controls"><label>Usuario</label><input name="txtUsuario" class="form-control" type="text"  required="" placeholder="Usuario"><small class="form-text text-danger help-block"></small></div>
+                            <div class="form-group floating-label-form-group controls"><label>Usuario</label><input name="txtUsuario" class="form-control" type="text"  required placeholder="Usuario"><small class="form-text text-danger help-block"></small></div>
                         </div>
                         <div class="control-group">
-                            <div class="form-group floating-label-form-group controls"><label>Contraseña</label><input name="txtContrasenia" class="form-control" type="password" placeholder="Contraseña"><small class="form-text text-danger help-block"></small></div>
+                            <div class="form-group floating-label-form-group controls"><label>Contraseña</label><input name="txtContrasenia" class="form-control" type="password" required placeholder="Contraseña"><small class="form-text text-danger help-block"></small></div>
                         </div>
                         <div class="control-group"></div>
                         <div id="success"></div>
@@ -60,7 +67,7 @@
         <hr>
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/background.js"></script>
+<!--        <script src="assets/js/background.js"></script>-->
         <script src="assets/js/clean-blog.js"></script>
     </body>
 
