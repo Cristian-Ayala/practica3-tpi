@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +22,7 @@ public class empleados extends HttpServlet {
 
     @Inject
     EmpleadosFacade empleadosFacade;
-    Empleados empleado = new Empleados();
+    Empleados empleado;
 
     public static boolean isNullOrEmpty(String str) {
         return ((str != null) ? (!str.trim().isEmpty()) : (false));
@@ -77,8 +76,7 @@ public class empleados extends HttpServlet {
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
             request.setAttribute("listaEmpleados", empleadosFacade.findAll());
-            RequestDispatcher rd = request.getRequestDispatcher("/CRUD.jsp");
-            rd.forward(request, response);
+            request.getRequestDispatcher("/CRUD.jsp").forward(request, response);
             out.println("<h1>Servlet empleados at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");

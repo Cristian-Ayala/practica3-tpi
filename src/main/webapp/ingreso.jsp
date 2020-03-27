@@ -49,10 +49,10 @@
                     <h1 style="color:#000000">Ingresa tus datos:</h1>
                     <form id="contactForm" name="sentMessage" method="POST" action="usuarios">
                         <div class="control-group">
-                            <div class="form-group floating-label-form-group controls"><label>Usuario</label><input name="txtUsuario" class="form-control" type="text"  required placeholder="Usuario"><small class="form-text text-danger help-block"></small></div>
+                            <div class="form-group floating-label-form-group controls"><label>Usuario</label><input name="txtUsuario" class="form-control"  autocomplete="username" type="text"  required placeholder="Usuario"><small class="form-text text-danger help-block"></small></div>
                         </div>
                         <div class="control-group">
-                            <div class="form-group floating-label-form-group controls"><label>Contraseña</label><input name="txtContrasenia" class="form-control" type="password" required placeholder="Contraseña"><small class="form-text text-danger help-block"></small></div>
+                            <div class="form-group floating-label-form-group controls"><label>Contraseña</label><input name="txtContrasenia" class="form-control" type="password" autocomplete="current-password" required placeholder="Contraseña"><small class="form-text text-danger help-block"></small></div>
                         </div>
                         <div class="control-group"></div>
                         <div id="success"></div>

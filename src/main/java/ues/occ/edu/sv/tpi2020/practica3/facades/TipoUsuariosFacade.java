@@ -5,6 +5,7 @@
  */
 package ues.occ.edu.sv.tpi2020.practica3.facades;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +16,7 @@ import ues.occ.edu.sv.tpi2020.practica3.entities.TipoUsuarios;
  * @author cristian
  */
 @Stateless
+@LocalBean
 public class TipoUsuariosFacade extends AbstractFacade<TipoUsuarios> implements GenericLocalInterface<TipoUsuarios> {
 
     @PersistenceContext(unitName = "practica3")

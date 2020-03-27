@@ -8,7 +8,6 @@ package ues.occ.edu.sv.tpi2020.practica3.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,17 +53,14 @@ public class usuarios extends HttpServlet {
                 if (userFacade.verificar(request.getParameter("txtUsuario"), org.apache.commons.codec.digest.DigestUtils.sha256Hex(request.getParameter("txtContrasenia")))) {
                     request.getSession().setAttribute("usuario", request.getParameter("txtUsuario"));
                     request.setAttribute("estado", "SUCCESS");
-                    RequestDispatcher rd = request.getRequestDispatcher("/empleados.jsp");
-                    rd.forward(request, response);
+                    request.getRequestDispatcher("/empleados.jsp").forward(request, response);
                 } else {
                     request.setAttribute("estado", "FAIL");
-                    RequestDispatcher rd = request.getRequestDispatcher("/ingreso.jsp");
-                    rd.forward(request, response);
+                    request.getRequestDispatcher("/ingreso.jsp").forward(request, response);
                 }
             }else {
                     request.setAttribute("estado", "FAIL");
-                    RequestDispatcher rd = request.getRequestDispatcher("/ingreso.jsp");
-                    rd.forward(request, response);
+                    request.getRequestDispatcher("/ingreso.jsp").forward(request, response);
                 }
 
             out.println("<h1>Servlet usuarios at " + request.getContextPath() + "</h1>");

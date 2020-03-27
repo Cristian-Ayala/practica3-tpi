@@ -3,7 +3,7 @@
 <%
     if (request.getSession().getAttribute("usuario") == null) {
 %>
-<jsp:forward page="index.html">
+<jsp:forward page="ingreso.jsp">
     <jsp:param name="error" value="true"/>
 </jsp:forward>
 <%
@@ -31,7 +31,7 @@
                 <div
                     class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">INICIO</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="<%= request.getContextPath()%>/userServlet">Usuarios</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="<%= request.getContextPath()%>/empleados">empleados</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="ingreso.jsp">cerrar sesión</a></li>
                         <li class="nav-item" role="presentation"></li>

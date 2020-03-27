@@ -30,7 +30,7 @@ public class EmpleadosFacade extends AbstractFacade<Empleados> implements Generi
 
     public void eliminarById(int ID) {
         try {
-            getEntityManager().remove(getEntityManager().createQuery("SELECT n FROM Empleados n WHERE n.codigo=:id").setParameter("id", ID).getResultList().get(0));
+            getEntityManager().remove(getEntityManager().createQuery("SELECT n FROM Empleados n WHERE n.codigo =:id").setParameter("id", ID).getResultList().get(0));
         } catch (Exception ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }

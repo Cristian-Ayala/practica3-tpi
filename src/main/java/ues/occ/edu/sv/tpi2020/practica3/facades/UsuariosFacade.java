@@ -46,5 +46,18 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> implements GenericL
         }
         return false;
     }
+    
+        public void eliminarById(int ID) {
+        try {
+            getEntityManager().remove(getEntityManager().createQuery("SELECT n FROM Usuarios n WHERE n.idUsuario=:id").setParameter("id", ID).getResultList().get(0));
+        } catch (Exception ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
 
+    public boolean noCreated(Usuarios user) {
+        return getEntityManager().createQuery("SELECT n FROM Usuarios n WHERE n.nombres=:nombre AND n.apellidos=:apellidos AND n.edad=:edad AND n.usuario=:usuario").setParameter("nombre", user.getNombres()).setParameter("apellidos", user.getApellidos()).setParameter("edad", user.getEdad()).setParameter("usuario", user.getUsuario()).getResultList().isEmpty();
+    }
+
+//    
 }

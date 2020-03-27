@@ -3,7 +3,7 @@
 <%@ page session="true" %>
 <%
     if (request.getSession().getAttribute("usuario")== null) {
-//        request.setAttribute("error", true);
+        request.setAttribute("error", true);
         request.getRequestDispatcher("/ingreso.jsp").forward(request, response);
     } else{
     }
@@ -30,7 +30,7 @@
                     class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item" role="presentation"><a class="nav-link" href="<%= request.getContextPath()%>/empleados.jsp">INICIO</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">empleados</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="<%= request.getContextPath()%>/userServlet">Usuarios</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">cerrar sesión</a></li>
                         <li class="nav-item" role="presentation"></li>
                     </ul>
@@ -152,6 +152,7 @@
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/background.js"></script>
+        <script src="assets/js/empleados.js"></script>
         <script src="assets/js/clean-blog.js"></script>
     </body>
 

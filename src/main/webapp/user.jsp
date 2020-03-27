@@ -2,10 +2,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page session="true" %>
 <%
-    if (request.getSession().getAttribute("usuario")== null) {
+    if (request.getSession().getAttribute("usuario") == null) {
 //        request.setAttribute("error", true);
         request.getRequestDispatcher("/ingreso.jsp").forward(request, response);
-    } else{
+    } else {
     }
 %>
 <!DOCTYPE html>
@@ -30,20 +30,20 @@
                     class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item" role="presentation"><a class="nav-link" href="<%= request.getContextPath()%>/empleados.jsp">INICIO</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">empleados</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="<%= request.getContextPath()%>/empleados">empleados</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">cerrar sesión</a></li>
                         <li class="nav-item" role="presentation"></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <header class="masthead" style="background-image:url('assets/img/practica-3.png');">
+        <header class="masthead" style="background-image:url('assets/img/user-jsp.png');">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 col-lg-8 mx-auto">
                         <div class="site-heading">
-                            <h1>Practica #3</h1>
+                            <h1>Usuarios CRUD</h1>
                         </div>
                     </div>
                 </div>
@@ -51,34 +51,41 @@
         </header>
         <div id="center" style="display: inline-flex;">
             <div id="divForm" style="padding-left: 30px;max-width: 30%;display: inline-block;vertical-align: top;margin-right: 50px;">
-                <h2 class="post-title">Agrega un nuevo empleado:</h2>
-                <form id="contactForm" name="sentMessage">
+                <h2 class="post-title">Agrega un nuevo usuario:</h2>
+                <form id="contactForm" method="POST" action="<%= request.getContextPath()%>/userServlet">
                     <div class="control-group">
-                        <div class="form-group floating-label-form-group controls"><label>Nombres</label><input class="form-control" type="text" id="name" name="name" required="" placeholder="Nombres"><small class="form-text text-danger help-block"></small></div>
+                        <div class="form-group floating-label-form-group controls"><label>Nombres</label><input class="form-control" type="text" id="nombre" name="nombre" required="" placeholder="Nombres"><small class="form-text text-danger help-block"></small></div>
                     </div>
                     <div class="control-group">
-                        <div class="form-group floating-label-form-group controls"><label>Apellidos</label><input class="form-control" type="text" id="email" name="email" required="" placeholder="Apellidos"><small class="form-text text-danger help-block"></small></div>
+                        <div class="form-group floating-label-form-group controls"><label>Apellidos</label><input class="form-control" type="text" id="apellido" name="apellido" required="" placeholder="Apellidos"><small class="form-text text-danger help-block"></small></div>
                     </div>
                     <div class="control-group">
-                        <div class="form-group floating-label-form-group controls"><label>Teléfono</label><input class="form-control" type="text" id="phone" name="phone" required="" placeholder="Teléfono"><small class="form-text text-danger help-block"></small></div>
+                        <div class="form-group floating-label-form-group controls"><label>Edad</label><input class="form-control" type="text" id="edad" name="edad" required="" placeholder="Edad"><small class="form-text text-danger help-block"></small></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls"><label>Usuario</label><input class="form-control" type="text" id="usuario" name="usuario" required="" placeholder="Usuario"><small class="form-text text-danger help-block"></small></div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls"><label>Contraseña</label><input class="form-control" type="text" id="contrasenia" name="contrasenia" required="" placeholder="Contraseña"><small class="form-text text-danger help-block"></small></div>
                     </div>
                     <div id="success"></div>
                     <div class="form-group"><button class="btn btn-primary" id="sendMessageButton" type="submit" style="margin-top: 30px;">CRear</button></div>
                 </form>
-                
+
                 <div class="alert alert-success" role="alert" style="display:${request.getParameter("correcto").equals("true")?('inherit'):('none')};" name="<%=request.getParameter("correcto")%>"><span>¡Se agregó el empleado con éxito!</span></div>
-                
+
             </div><div id="gradient" style="border-radius:0.5rem!important;border:1px solid #dee2e6!important;">
                 <section>
                     <!--for demo wrap-->
-                    <h1>Empleados:</h1>
+                    <h1>Usuarios:</h1>
                     <div class="tbl-header">
                         <table cellpadding="0" cellspacing="0" border="0">
                             <thead>
                                 <tr>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
-                                    <th>Teléfono</th>
+                                    <th>Edad</th>
+                                    <th>Usuario</th>
                                     <th>Operaciones</th>
                                 </tr>
                             </thead>
@@ -87,12 +94,13 @@
                     <div class="tbl-content" id="elimineition">
                         <table cellpadding="0" cellspacing="0" border="0">
                             <tbody>
-                                <c:forEach items="${listaEmpleados}" var="empleado" varStatus="loop">
+                                <c:forEach items="${listaUsuarios}" var="user" varStatus="loop">
                                     <tr>
-                                        <td style="display:none">${empleado.codigo}</td>
-                                        <td>${empleado.nombre}</td>
-                                        <td>${empleado.apellidos}</td>
-                                        <td>${empleado.telefono}</td>
+                                        <td style="display:none">${user.idUsuario}</td>
+                                        <td>${user.nombres}</td>
+                                        <td>${user.apellidos}</td>
+                                        <td>${user.edad}</td>
+                                        <td>${user.usuario}</td>
                                         <td style="display:inline-flex;">              
                                             <button class="add"  id="remove${loop.index}" onclick="editOrRem(this.id)" style="margin-right:10px" data-toggle="modal" data-target="#modal-1">
                                                 <i class="fa fa-trash"></i>
@@ -114,9 +122,9 @@
                     <div class="modal-header">
                         <h4 class="modal-title">Confirmar</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                     <div class="modal-body">
-                        <form method="POST" action="<%= request.getContextPath()%>/empleados">
-                            <h8>¿Está segur@ de querer eliminar a "</h8><h8 id="empleadix" name="empleadix"></h8><h8>" de la lista de empleados?</h8>
-                            <input type="hidden" id="empleadixID" name="empleadixID">
+                        <form method="POST" action="<%= request.getContextPath()%>/userServlet">
+                            <h8>¿Está segur@ de querer eliminar a "</h8><h8 id="elimEmpleado" name="elimEmpleado"></h8><h8>" de la lista de usuarios?</h8>
+                            <input type="hidden" id="elimEmpleadoID" name="elimEmpleadoID">
                             <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Cerrar</button><button class="btn btn-danger" type="submit">Eliminar</button></div>
                         </form>
                     </div>
@@ -130,17 +138,22 @@
                         <h4 class="modal-title">Modicar</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                     <div class="modal-body">
                         <div id="divForm-1">
-                            <form id="contactForm-1"  method="POST" action="<%= request.getContextPath()%>/empleados">
+                            <form id="contactForm-1"  method="POST" action="<%= request.getContextPath()%>/userServlet">
+                                <input type="hidden" id="editId" name="editId" value="">
                                 <div class="control-group">
-                                    <div class="form-group floating-label-form-group controls floating-label-form-group-with-value">
-                                        <input type="hidden" id="editId" name="editId" value="">
-                                        <label>Nombres</label><input class="form-control" type="text" id="editNombre" name="editNombre" required="" placeholder="Nombres"><small class="form-text text-danger help-block"></small></div>
+                                    <div class="form-group floating-label-form-group controls floating-label-form-group-with-value"><label>Nombres</label><input class="form-control" type="text" id="txtNombre" name="txtNombre" required="" placeholder="Nombres"><small class="form-text text-danger help-block"></small></div>
                                 </div>
                                 <div class="control-group">
-                                    <div class="form-group floating-label-form-group controls floating-label-form-group-with-value"><label>Apellidos</label><input class="form-control" type="text" id="editApellido" name="editApellido" required="" placeholder="Apellidos"><small class="form-text text-danger help-block"></small></div>
+                                    <div class="form-group floating-label-form-group controls floating-label-form-group-with-value"><label>Apellidos</label><input class="form-control" type="text" id="txtApellido" name="txtApellido" required="" placeholder="Apellidos"><small class="form-text text-danger help-block"></small></div>
                                 </div>
                                 <div class="control-group">
-                                    <div class="form-group floating-label-form-group controls floating-label-form-group-with-value"><label>Teléfono</label><input class="form-control" type="text" id="editTel" name="editTel" required="" placeholder="Teléfono"><small class="form-text text-danger help-block"></small></div>
+                                    <div class="form-group floating-label-form-group controls floating-label-form-group-with-value"><label>Edad</label><input class="form-control" type="text" id="txtEdad" name="txtEdad" required="" placeholder="Edad"><small class="form-text text-danger help-block"></small></div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="form-group floating-label-form-group controls floating-label-form-group-with-value"><label>Usuario</label><input class="form-control" type="text" id="txtUsuario" name="txtUsuario" required="" placeholder="Usuario"><small class="form-text text-danger help-block"></small></div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="form-group floating-label-form-group controls"><label>Contraseña</label><input class="form-control" type="text" id="txtContrasenia" name="txtContrasenia" required="" placeholder="Contraseña"><small class="form-text text-danger help-block"></small></div>
                                 </div>
                                 <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">cerrar</button><button class="btn btn-primary" type="submit">confirmar</button></div>
                             </form>
@@ -152,6 +165,7 @@
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/background.js"></script>
+        <script src="assets/js/usuarios.js"></script>
         <script src="assets/js/clean-blog.js"></script>
     </body>
 
