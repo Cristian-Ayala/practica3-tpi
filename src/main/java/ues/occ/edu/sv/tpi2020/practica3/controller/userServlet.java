@@ -14,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import ues.occ.edu.sv.tpi2020.practica3.entities.TipoUsuarios;
 import ues.occ.edu.sv.tpi2020.practica3.entities.Usuarios;
 import ues.occ.edu.sv.tpi2020.practica3.facades.TipoUsuariosFacade;
 import ues.occ.edu.sv.tpi2020.practica3.facades.UsuariosFacade;
@@ -65,7 +64,7 @@ public class userServlet extends HttpServlet {
                     user.setApellidos(request.getParameter("apellido"));
                     user.setEdad(Integer.parseInt(request.getParameter("edad")));
                     user.setUsuario(request.getParameter("usuario"));
-                    user.setPassword(request.getParameter("contrasenia"));
+                    user.setPassword(org.apache.commons.codec.digest.DigestUtils.sha256Hex(request.getParameter("contrasenia")));
                     user.setIdTipoUsuario(typeFacade.find(2));
                     if (usuarioFacade.noCreated(user)) {
                         usuarioFacade.create(user);
@@ -84,7 +83,7 @@ public class userServlet extends HttpServlet {
                     user.setApellidos(request.getParameter("txtApellido"));
                     user.setEdad(Integer.parseInt(request.getParameter("txtEdad")));
                     user.setUsuario(request.getParameter("txtUsuario"));
-                    user.setPassword(request.getParameter("txtContrasenia"));
+                    user.setPassword(org.apache.commons.codec.digest.DigestUtils.sha256Hex(request.getParameter("txtContrasenia")));
                     user.setIdTipoUsuario(typeFacade.find(2));
                     usuarioFacade.edit(user);
                     //Evalua si lo quiere eliminar
